@@ -9,13 +9,16 @@
 
     public void Analyze(IEnumerable<Planet> planets)
     {
+        
+
         var propertyNamesToSelectorsMapping =
-             new Dictionary<string, Func<Planet, int?>>()
+             new Dictionary<string, Func<Planet, long?>>()
              {
                  ["population"] = planet => planet.Population,
                  ["diameter"] = planet => planet.Diameter,
                  ["surface water"] = planet => planet.Population
              };
+        _planetsUserInteractor.Show(planets);
 
         var userChoice = _planetsUserInteractor.
             ChooseStatisticsToBeShown(
@@ -24,7 +27,7 @@
         if (userChoice is null ||
             !propertyNamesToSelectorsMapping.ContainsKey(userChoice))
         {
-            _planetsUserInteractor.Show("Invalid choide.");
+            _planetsUserInteractor.ShowMessage("Invalid choide.");
         }
         else
         {
@@ -39,7 +42,7 @@
     private static void ShowStatistics(
         IEnumerable<Planet> planets,
         string propertyName,
-        Func<Planet, int?> propertySelector)
+        Func<Planet, long?> propertySelector)
     {
         ShowStatistics(
             "Max",
@@ -57,7 +60,7 @@
     private static void ShowStatistics(
         string descriptor,
         Planet selectedPlanet,
-        Func<Planet, int?> propertySelector,
+        Func<Planet, long?> propertySelector,
         string propertyName)
     {
         Console.WriteLine($"{descriptor} {propertyName} is: " +

@@ -5,13 +5,13 @@ public readonly record struct Planet
     public string Name { get; }
     public int Diameter { get; }
     public int? SurfaceWater { get; }
-    public int? Population { get; }
+    public long? Population { get; }
 
     public Planet(
         string name,
         int diameter,
         int? surfaceWater,
-        int? population)
+        long? population)
     {
         if (name is null)
         {
@@ -28,9 +28,9 @@ public readonly record struct Planet
         var name = planetDto.name;
         var diameter = int.Parse(planetDto.diameter);
 
-        int? population = planetDto.population.ToIntOrNull();
+        long? population = planetDto.population.ToLongOrNull();
         int? surfaceWater = planetDto.surface_water.ToIntOrNull();
 
-        return new Planet(name, diameter, population, surfaceWater);
+        return new Planet(name, diameter, surfaceWater, population);
     }
 }

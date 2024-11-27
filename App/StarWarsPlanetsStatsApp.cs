@@ -19,10 +19,10 @@
         var planets = await _planetsReader.Read();
 
 
-        foreach (var planet in planets)
-        {
-            _userInteractor.ShowMessage(planet.Name);
-        }
+        //foreach (var planet in planets)
+        //{
+        //    _userInteractor.ShowMessage(planet.Name);
+        //}
 
         _planetsStatisticsAnalyzer.Analyze(planets);
     }
